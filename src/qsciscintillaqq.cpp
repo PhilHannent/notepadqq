@@ -30,7 +30,7 @@
 #include <QTextCodec>
 #include <QTextStream>
 #include <Qsci/qsciscintillabase.h>
-#include <QtXml/qdom.h>
+//#include <QtXml/qdom.h>
 #include <QHash>
 #include <QMessageBox>
 #include <QApplication>

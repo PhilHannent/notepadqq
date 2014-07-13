@@ -39,9 +39,9 @@
 #include <QSettings>
 #include <QLabel>
 #include <QMessageBox>
-#include <QtGui/QCloseEvent>
+#include <QCloseEvent>
 #include <QClipboard>
-#include <QtNetwork/QLocalSocket>
+#include <QLocalSocket>
 #include <QTextCodec>
 #include <QTextDocument>
 #include <QTemporaryFile>
@@ -460,12 +460,21 @@ int MainWindow::askIfWantToSave(QsciScintillaqq *sci, int reason)
     QString file;
     QTabWidgetqq *tabWidget = sci->tabWidget();
 
+#if QT_VERSION < 0x050000
     if (sci->fileName() == "")
     {
         file = Qt::escape(tabWidget->tabText(sci->getTabIndex()));
     } else {
         file = Qt::escape(QFileInfo(sci->fileName()).fileName());
     }
+#else
+    if (sci->fileName().isEmpty())
+    {
+        file = QString(tabWidget->tabText(sci->getTabIndex())).toHtmlEscaped();
+    } else {
+        file = QString(QFileInfo(sci->fileName()).fileName()).toHtmlEscaped();
+    }
+#endif
     msgBox.setWindowTitle(QCoreApplication::applicationName());
 
     msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);

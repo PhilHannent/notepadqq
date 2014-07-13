@@ -20,14 +20,14 @@
  *
  */
 
-#include <QtGui/QApplication>
+#include <QApplication>
 #include "mainwindow.h"
 #include <QTextCodec>
 #include <QTranslator>
 #include <QLocale>
 #include <QLibraryInfo>
 #include <QSharedMemory>
-#include <QtNetwork/QLocalSocket>
+#include <QLocalSocket>
 #include <QDesktopWidget>
 #include "constants.h"
 #include "generalfunctions.h"
@@ -71,7 +71,9 @@ int main(int argc, char *argv[])
     a.installTranslator(&qtTranslator);
     a.installTranslator(&appTranslator);
 
+#if QT_VERSION < 0x050000
     QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
+#endif
 
     QCoreApplication::setOrganizationName("notepadqq");
     QCoreApplication::setOrganizationDomain("http://notepadqq.sourceforge.net/");

@@ -4,9 +4,14 @@
 #
 #-------------------------------------------------
 
-QT       += core gui \
+QT       += core \
             network \
             xml
+greaterThan(QT_MAJOR_VERSION, 4) {
+    QT       += widgets
+}
+#CONFIG += link_pkgconfig
+#PKGCONFIG += file-devel qscintilla2
 
 TARGET = notepadqq
 TEMPLATE = app
@@ -101,4 +106,3 @@ unix {
 }
 
 unix|win32: LIBS += -lmagic
-
